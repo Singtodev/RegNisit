@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RegNisit.Pages.UserProfilePage"
+             Title="User Profile">
+    <ScrollView>
+        <VerticalStackLayout Padding="20"
+                Spacing="15">
+            <!-- Avatar with Gesture -->
+            <Frame WidthRequest="200"
+                   HeightRequest="200"
+                   CornerRadius="100"
+                   Padding="0"
+                   IsClippedToBounds="True"
+                   BorderColor="Black"
+                   HorizontalOptions="Center">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnAvatarTapped"/>
+                </Frame.GestureRecognizers>
+                <Image Source="avatar.jpg"
+                       WidthRequest="200"
+                       HeightRequest="200"
+                       Aspect="AspectFill"/>
+            </Frame>
+
+            <!-- User Information -->
+            <Label Text="Email:"
+                    FontAttributes="Bold"/>
+            <Label Text="{Binding Email}"
+                    TextColor="Gray"/>
+            <Label Text="Password:"
+                    FontAttributes="Bold"/>
+            <Label Text="********"
+                    TextColor="Gray"/>
+            <Label Text="Birth Date:"
+                    FontAttributes="Bold"/>
+            <Label Text="{Binding BirthDate}"
+                    TextColor="Gray"/>
+            <Label Text="Year of Admission:"
+                    FontAttributes="Bold"/>
+            <Label Text="{Binding AdmissionYear}"
+                    TextColor="Gray"/>
+            <Label Text="Current Year:"
+                    FontAttributes="Bold"/>
+            <Label Text="{Binding CurrentYear}"
+                    TextColor="Gray"/>
+            <Label Text="Registered Courses:"
+                    FontAttributes="Bold"/>
+            <CollectionView ItemsSource="{Binding RegisteredCourses}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding CourseName}"
+                                TextColor="Gray"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Text="GPAX:"
+                    FontAttributes="Bold"/>
+            <Label Text="{Binding GPAX}"
+                    TextColor="Gray"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

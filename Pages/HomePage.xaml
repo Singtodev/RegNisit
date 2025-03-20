@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RegNisit.Pages.HomePage"
+             Shell.NavBarIsVisible="False"
+             Title="HomePage"
+             xmlns:vm="clr-namespace:RegNisit.ViewModels"
+             x:DataType="vm:HomePageViewModel">
+       <ContentPage.BindingContext>
+              <vm:HomePageViewModel/>
+       </ContentPage.BindingContext>
+       <!-- Parent Grid Layout -->
+       <ScrollView>
+
+              <Grid RowDefinitions="Auto, Auto, Auto , Auto"
+                    ColumnDefinitions="*"
+                    BackgroundColor="White">
+                     <!-- Row 1: Header -->
+                     <Frame Grid.Row="0"
+                            BackgroundColor="LightYellow"
+                            Padding="10"
+                            MinimumHeightRequest="100"
+                            HasShadow="False">
+                            <FlexLayout JustifyContent="SpaceBetween"
+                                        AlignItems="Center"
+                                        Direction="Row">
+                                   <Label Text="RegNisit"
+                                          FontSize="24"
+                                          FontAttributes="Bold"
+                                          TextColor="Black"/>
+
+                                   <HorizontalStackLayout Spacing="10">
+                                          <!-- Avatar -->
+                                          <Frame WidthRequest="60"
+                                                 HeightRequest="60"
+                                                 CornerRadius="30"
+                                                 Padding="0"
+                                                 IsClippedToBounds="True"
+                                                 BorderColor="Black">
+                                                 <Frame.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="OnAvatarTapped"/>
+                                                 </Frame.GestureRecognizers>
+                                                 <Image Source="avatar.jpg"
+                                                        WidthRequest="60"
+                                                        HeightRequest="60"
+                                                        Aspect="AspectFill"/>
+                                          </Frame>
+
+                                          <!-- Logout Button -->
+                                          <Button Clicked="OnLogoutClicked"
+                                                  WidthRequest="100"
+                                                  HeightRequest="40"
+                                                  Text="Logout"
+                                                  BackgroundColor="Red"
+                                                  TextColor="White"/>
+                                   </HorizontalStackLayout>
+                            </FlexLayout>
+                     </Frame>
+
+                     <!-- Row 2: Main Content -->
+                     <Grid Grid.Row="1"
+                           BackgroundColor="LightGray"
+                           Padding="20">
+                            <VerticalStackLayout Spacing="10">
+                                   <!-- Welcome Message -->
+                                   <Frame CornerRadius="10"
+                                          BackgroundColor="Gold"
+                                          Padding="10">
+                                          <Label Text="Welcome back, Singharat Bunphim!"
+                                                 FontSize="16"
+                                                 TextColor="Black"
+                                                 FontAttributes="Bold"/>
+                                   </Frame>
+
+                                   <!-- Buttons -->
+                                   <Grid ColumnDefinitions="*,*"
+                                         ColumnSpacing="20">
+                                          <!-- Column 1 -->
+                                          <Button Text="ลงทะเบียนเรียนทั้งหมด"
+                                                  BackgroundColor="White"
+                                                  TextColor="Black"
+                                                  HeightRequest="200"
+                                                  ContentLayout="Top, 10"
+                                                  Padding="10"
+                                                  ImageSource="courses.png"
+                                                  HorizontalOptions="Fill"
+                                                  Grid.Column="0"/>
+
+                                          <!-- Column 2 -->
+                                          <Button Text="ลงทะเบียนเรียน"
+                                                  BackgroundColor="White"
+                                                  TextColor="Black"
+                                                  HeightRequest="200"
+                                                  ContentLayout="Top, 10"
+                                                  Padding="10"
+                                                  ImageSource="edit.jpg"
+                                                  HorizontalOptions="Fill"
+                                                  Grid.Column="1"/>
+                                   </Grid>
+                            </VerticalStackLayout>
+                     </Grid>
+                     <Grid Grid.Row="2"
+                           Padding="30">
+                            <VerticalStackLayout Spacing="10">
+                                   <!-- Section Title -->
+                                   <Label Text="คอร์สที่ลงทะเบียนในปีการศึกษานี้"
+                                          FontSize="18"
+                                          FontAttributes="Bold"
+                                          TextColor="Black"
+                                          Margin="0,10,0,5"/>
+                                   <CollectionView ItemsSource="{Binding Courses}"
+                                                   Margin="0,0,0,10">
+                                          <CollectionView.ItemTemplate>
+                                                 <DataTemplate x:DataType="vm:CourseModel">
+                                                        <Border Padding="10">
+                                                               <Grid ColumnDefinitions="*,Auto">
+
+                                                                      <!-- รายละเอียดวิชา -->
+                                                                      <StackLayout Grid.Column="0">
+                                                                             <Label Text="{Binding CourseCode}"
+                                                                                    FontSize="16"
+                                                                                    FontAttributes="Bold"
+                                                                                    TextColor="Black"/>
+                                                                             <Label Text="{Binding CourseName}"
+                                                                                    FontSize="14"
+                                                                                    TextColor="Gray"/>
+                                                                             <Label Text="{Binding Schedule}"
+                                                                                    FontSize="14"
+                                                                                    TextColor="Gray"/>
+                                                                             <Label Text="{Binding Room}"
+                                                                                    FontSize="14"
+                                                                                    TextColor="Gray"/>
+                                                                      </StackLayout>
+
+                                                                      <!-- ปุ่ม "ดูรายละเอียด" และ "ถอนวิชา" -->
+                                                                      <StackLayout Orientation="Vertical"
+                                                                                   Grid.Column="1"
+                                                                                   VerticalOptions="Center"
+                                                                                   Spacing="5">
+                                                                             <Button Text="ดูรายละเอียด"
+                                                                                     Command="{Binding ViewDetailsCommand}"
+                                                                                     FontSize="12"
+                                                                                     Padding="5"
+                                                                                     TextColor="White"
+                                                                                     BackgroundColor="Gray"/>
+                                                                             <Button Text="ถอนวิชา"
+                                                                                     Command="{Binding RemoveCourseCommand}"
+                                                                                     FontSize="12"
+                                                                                     Padding="5"
+                                                                                     TextColor="White"
+                                                                                     BackgroundColor="Gold"/>
+                                                                      </StackLayout>
+
+                                                               </Grid>
+                                                        </Border>
+                                                 </DataTemplate>
+                                          </CollectionView.ItemTemplate>
+                                   </CollectionView>
+                            </VerticalStackLayout>
+                     </Grid>
+                     <!-- Row 3: Footer -->
+                     <Label Grid.Row="3"
+                            Text="© 2025 RegNisit"
+                            FontSize="14"
+                            TextColor="Gray"
+                            HorizontalOptions="Center"
+                            Padding="10"/>
+              </Grid>
+       </ScrollView>
+</ContentPage>
