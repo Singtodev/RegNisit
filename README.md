@@ -62,6 +62,14 @@ Mini Project (Front-End)
 <img src="https://github.com/user-attachments/assets/dc5e7ec5-39fd-4473-83fd-6f677ac61609" width="500"/>
 
 - เมื่อถอนรายวิชาออกไปแล้ว จะไปเพิ่มใน **available list** และสามารถเพิ่มวิชาเข้าไปใหม่ได้  
+<img alt="Screenshot 2025-03-22 at 5 26 33 PM" src="https://github.com/user-attachments/assets/cf6c25f1-a301-4155-ba1a-5c1fb9b68368" width="500"  />
+<img  width="500" alt="Screenshot 2025-03-22 at 5 27 21 PM" src="https://github.com/user-attachments/assets/c5c0c9ec-604b-4489-b65d-1a075f26bc01" />
 
-<img src="https://github.com/user-attachments/assets/e4a75ff2-1354-488c-aa61-eb7f41f9c4b8" width="500"/>  
-<img src="https://github.com/user-attachments/assets/ee2f45ef-6d64-4b33-8e25-7a9a519927e2" width="500"/>
+-- เมนูสำหรับการค้นหา สามารถค้นหารายวิชาได้ ผ่านช่อง search สามารถ ค้นหาชื่อวิชา และ รหัสวิชาได้
+<img  width="500" alt="Screenshot 2025-03-22 at 5 27 33 PM" src="https://github.com/user-attachments/assets/211d179f-325f-4780-bca0-35580af54dfd" />
+-- ค้นหา "Data"
+<img  width="500" alt="Screenshot 2025-03-22 at 5 27 52 PM" src="https://github.com/user-attachments/assets/95940c7d-ebdb-40bc-890b-9e13d28c9c56" />
+-- ค้นหา "C"
+<img width="500" alt="Screenshot 2025-03-22 at 5 28 33 PM" src="https://github.com/user-attachments/assets/afce52c7-3d38-40cd-8940-4df1ca1c4a0b" />
+
+
