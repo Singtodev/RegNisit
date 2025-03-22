@@ -5,21 +5,24 @@ public partial class LoginPage : ContentPage
 	public LoginPage()
 	{
 		InitializeComponent();
+		EmailEntry.Text = "admin@admin.com";
+		passwordEntry.Text = "1";
+		errorLabel.IsVisible = false;
 	}
 
 	private async void OnLoginClicked(object sender, EventArgs e)
 	{
-		string username = usernameEntry.Text;
+		string Email = EmailEntry.Text;
 		string password = passwordEntry.Text;
 
-		if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+		if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(password))
 		{
-			errorLabel.Text = "Please enter both username and password.";
+			errorLabel.Text = "Please enter both Email and password.";
 			errorLabel.IsVisible = true;
 			return;
 		}
 
-		if (username == "admin" && password == "1")
+		if (Email == "admin@admin.com" && password == "1")
 		{
 			await DisplayAlert("Login Successful", $"Welcome, Singharat Bunphim!", "OK");
 			errorLabel.IsVisible = false;
@@ -27,7 +30,7 @@ public partial class LoginPage : ContentPage
 		}
 		else
 		{
-			errorLabel.Text = "Invalid username or password.";
+			errorLabel.Text = "Invalid Email or password.";
 			errorLabel.IsVisible = true;
 		}
 	}

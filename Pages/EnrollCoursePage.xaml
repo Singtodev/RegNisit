@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RegNisit.Pages.EnrollCoursePage"
+             xmlns:vm="clr-namespace:RegNisit.ViewModels"
+             xmlns:model="clr-namespace:RegNisit.Models"
+             x:DataType="vm:EnrollCourseViewModel">
+
+    <ScrollView Padding="10">
+        <Grid RowDefinitions="Auto, Auto, Auto, *"
+              ColumnDefinitions="*"
+              RowSpacing="10"
+              ColumnSpacing="10"
+              BackgroundColor="White">
+
+            <!-- Header -->
+            <Frame Grid.Row="0"
+                   BackgroundColor="LightYellow"
+                   Padding="10"
+                   MinimumHeightRequest="60"
+                   CornerRadius="8">
+                <FlexLayout JustifyContent="Center"
+                            AlignItems="Center">
+                    <Label Text="ลงทะเบียนเรียน เพิ่ม ลด วิชา"
+                           FontSize="20"
+                           HorizontalOptions="Center"
+                           TextColor="Black"
+                           LineBreakMode="WordWrap"/>
+                </FlexLayout>
+            </Frame>
+
+            <!-- วิชาที่ลงทะเบียนแล้ว -->
+            <StackLayout Grid.Row="1"
+                         Padding="10">
+                <Label Text="📚 วิชาที่ลงทะเบียนแล้ว"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       Margin="5"/>
+                <CollectionView ItemsSource="{Binding EnrolledCourses}"
+                                Margin="10">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:CourseModel">
+                            <Frame Padding="10"
+                                   Margin="5"
+                                   BorderColor="Gray">
+                                <StackLayout Spacing="5">
+                                    <Label Text="{Binding CourseCode}"
+                                           FontSize="16"
+                                           FontAttributes="Bold"/>
+                                    <Label Text="{Binding CourseName}"
+                                           FontSize="14"/>
+                                    <Label Text="{Binding Schedule}"
+                                           FontSize="12"
+                                           TextColor="Gray"/>
+                                    <Label Text="{Binding Room}"
+                                           FontSize="12"
+                                           TextColor="Gray"/>
+                                    <Button Text="ถอนวิชานี้"
+                                            BackgroundColor="Red"
+                                            TextColor="White"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:EnrollCourseViewModel}}, Path=UnenrollCourseCommand}"
+                                            CommandParameter="{Binding}"/>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+
+            <Button Grid.Row="2"
+                    Text="บันทึก"
+                    FontSize="18"
+                    BackgroundColor="Blue"
+                    TextColor="White"
+                    Padding="10"
+                    Margin="10"
+                    Command="{Binding SaveCommand}"/>
+            <!-- ค้นหาและแสดงวิชาที่ยังไม่ลงทะเบียน -->
+            <Grid Grid.Row="3"
+                  Padding="10">
+                <SearchBar Placeholder="ค้นหาวิชาเรียน..."
+                           Text="{Binding SearchText}"
+                           BackgroundColor="White"
+                           SearchCommand="{Binding PerformSearchCommand}"/>
+            </Grid>
+
+            <!-- วิชาที่ยังไม่ลงทะเบียน -->
+            <CollectionView Grid.Row="4"
+                            ItemsSource="{Binding FilteredCourses}"
+                            Margin="10">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:CourseModel">
+                        <Frame Padding="10"
+                               Margin="5"
+                               BorderColor="Gray">
+                            <StackLayout Spacing="5">
+                                <Label Text="{Binding CourseCode}"
+                                       FontSize="16"
+                                       FontAttributes="Bold"/>
+                                <Label Text="{Binding CourseName}"
+                                       FontSize="14"/>
+                                <Label Text="{Binding Schedule}"
+                                       FontSize="12"
+                                       TextColor="Gray"/>
+                                <Label Text="{Binding Room}"
+                                       FontSize="12"
+                                       TextColor="Gray"/>
+                                <Button Text="เพิ่มวิชานี้"
+                                        BackgroundColor="Green"
+                                        TextColor="White"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:EnrollCourseViewModel}}, Path=EnrollCourseCommand}"
+                                        CommandParameter="{Binding}"/>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </Grid>
+    </ScrollView>
+</ContentPage>

@@ -18,6 +18,16 @@ public partial class HomePage : ContentPage
 
 	private async void OnAvatarTapped(object sender, EventArgs e)
 	{
-			await Shell.Current.GoToAsync(nameof(UserProfilePage));
+		await Shell.Current.GoToAsync(nameof(UserProfilePage));
+	}
+
+	private async void OnPlusOrRemoveEnrollClicked(object sender, EventArgs e)
+	{
+		await Shell.Current.GoToAsync(nameof(EnrollCoursePage));
+	}
+
+	private async void OnCourseHistoryClicked(object sender, EventArgs e)
+	{
+		await Shell.Current.GoToAsync(nameof(CourseHistoryPage));
 	}
 }

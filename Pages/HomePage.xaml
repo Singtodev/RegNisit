@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RegNisit.Pages.HomePage"
              Shell.NavBarIsVisible="False"
-             Title="HomePage"
+             Title="หน้าแรก"
              xmlns:vm="clr-namespace:RegNisit.ViewModels"
+             xmlns:model="clr-namespace:RegNisit.Models"
              x:DataType="vm:HomePageViewModel">
        <ContentPage.BindingContext>
               <vm:HomePageViewModel/>
@@ -84,10 +85,11 @@
                                                   Padding="10"
                                                   ImageSource="courses.png"
                                                   HorizontalOptions="Fill"
+                                                  Clicked="OnCourseHistoryClicked"
                                                   Grid.Column="0"/>
 
                                           <!-- Column 2 -->
-                                          <Button Text="ลงทะเบียนเรียน"
+                                          <Button Text="ลงทะเบียนเรียน เพิ่ม / ลด วิชา"
                                                   BackgroundColor="White"
                                                   TextColor="Black"
                                                   HeightRequest="200"
@@ -95,6 +97,7 @@
                                                   Padding="10"
                                                   ImageSource="edit.jpg"
                                                   HorizontalOptions="Fill"
+                                                  Clicked="OnPlusOrRemoveEnrollClicked"
                                                   Grid.Column="1"/>
                                    </Grid>
                             </VerticalStackLayout>
@@ -103,7 +106,7 @@
                            Padding="30">
                             <VerticalStackLayout Spacing="10">
                                    <!-- Section Title -->
-                                   <Label Text="คอร์สที่ลงทะเบียนในปีการศึกษานี้"
+                                   <Label Text="การลงทะเบียนเรียนในเทอมนี้"
                                           FontSize="18"
                                           FontAttributes="Bold"
                                           TextColor="Black"
@@ -111,7 +114,7 @@
                                    <CollectionView ItemsSource="{Binding Courses}"
                                                    Margin="0,0,0,10">
                                           <CollectionView.ItemTemplate>
-                                                 <DataTemplate x:DataType="vm:CourseModel">
+                                                 <DataTemplate x:DataType="model:CourseModel">
                                                         <Border Padding="10">
                                                                <Grid ColumnDefinitions="*,Auto">
 
@@ -131,26 +134,6 @@
                                                                                     FontSize="14"
                                                                                     TextColor="Gray"/>
                                                                       </StackLayout>
-
-                                                                      <!-- ปุ่ม "ดูรายละเอียด" และ "ถอนวิชา" -->
-                                                                      <StackLayout Orientation="Vertical"
-                                                                                   Grid.Column="1"
-                                                                                   VerticalOptions="Center"
-                                                                                   Spacing="5">
-                                                                             <Button Text="ดูรายละเอียด"
-                                                                                     Command="{Binding ViewDetailsCommand}"
-                                                                                     FontSize="12"
-                                                                                     Padding="5"
-                                                                                     TextColor="White"
-                                                                                     BackgroundColor="Gray"/>
-                                                                             <Button Text="ถอนวิชา"
-                                                                                     Command="{Binding RemoveCourseCommand}"
-                                                                                     FontSize="12"
-                                                                                     Padding="5"
-                                                                                     TextColor="White"
-                                                                                     BackgroundColor="Gold"/>
-                                                                      </StackLayout>
-
                                                                </Grid>
                                                         </Border>
                                                  </DataTemplate>

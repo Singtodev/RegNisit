@@ -14,8 +14,8 @@
                      FontSize="24"
                      HorizontalOptions="Center"/>
 
-              <Entry x:Name="usernameEntry"
-                     Placeholder="Username"
+              <Entry x:Name="EmailEntry"
+                     Placeholder="Email"
                      Keyboard="Default"
                      BackgroundColor="White"
                      WidthRequest="300"/>

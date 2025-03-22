@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RegNisit.Pages.CourseHistoryPage"
+             Title="ประวัติการลงทะเบียนเรียน"
+             xmlns:vm="clr-namespace:RegNisit.ViewModels"
+             x:DataType="vm:CourseHistoryViewModel"
+             xmlns:model="clr-namespace:RegNisit.Models">
+
+    <ScrollView Padding="10">
+        <Grid RowDefinitions="Auto, Auto, Auto, Auto, *"
+              ColumnDefinitions="*">
+            <!-- ปุ่มเลือกปีการศึกษา -->
+            <Frame Grid.Row="0"
+                   Margin="0,0,0,30"
+                   BackgroundColor="LightYellow"
+                   Padding="10"
+                   MinimumHeightRequest="60"
+                   CornerRadius="8">
+                <FlexLayout JustifyContent="Center"
+                            AlignItems="Center">
+                    <Label  Text="{Binding SelectedYear.Year, StringFormat='เลือกปีการศึกษา {0}'}"
+                            FontSize="20"
+                            HorizontalOptions="Center"
+                            TextColor="Black"
+                            LineBreakMode="WordWrap"/>
+                </FlexLayout>
+            </Frame>
+
+            <FlexLayout Grid.Row="1"
+                        Direction="Row"
+                        Wrap="NoWrap"
+                        AlignItems="Center"
+                        JustifyContent="Start">
+                <BindableLayout.ItemsSource>
+                    <Binding Path="AvailableYears"/>
+                </BindableLayout.ItemsSource>
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="model:AcademicYearModel">
+                        <Button Text="{Binding Year}"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CourseHistoryViewModel}}, Path=SelectYearCommand}"
+                                CommandParameter="{Binding .}"
+                                BackgroundColor="{Binding Year, Converter={StaticResource SelectedYearToColorConverter}}"
+                                TextColor="Black"
+                                Margin="5"
+                                Padding="10"
+                                FontSize="16"
+                                BorderWidth="1"
+                                CornerRadius="10"
+                                BorderColor="Gray"
+                                HorizontalOptions="Start"/>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </FlexLayout>
+
+            <!-- รายการเทอม & วิชา -->
+            <CollectionView Grid.Row="2"
+                            ItemsSource="{Binding SelectedYear.Semesters}"
+                            SelectionMode="None"
+                            IsVisible="{Binding SelectedYear}"
+                            EmptyView="ยังไม่ได้ลงทะเบียน"
+                            Margin="0,20,0,0">
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"
+                                       ItemSpacing="15"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:SemesterModel">
+                        <Frame BackgroundColor="LightGray"
+                               Padding="15"
+                               Margin="10,5,10,15">
+                            <Grid RowDefinitions="Auto, Auto"
+                                  RowSpacing="15">
+                                <Label Text="{Binding SemesterName, StringFormat='เทอม {0}'}"
+                                       FontSize="18"
+                                       FontAttributes="Bold"
+                                       TextColor="Black"
+                                       Grid.Row="0"/>
+
+                                <CollectionView Grid.Row="1"
+                                                ItemsSource="{Binding Courses}"
+                                                SelectionMode="None"
+                                                EmptyView="ยังไม่ได้ลงทะเบียน">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout Orientation="Vertical"/>
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="model:CourseModel">
+                                            <Frame BackgroundColor="White"
+                                                   Padding="10"
+                                                   Margin="5"
+                                                   BorderColor="Gray">
+                                                <Grid RowDefinitions="Auto, Auto, Auto, Auto">
+                                                    <Label Text="{Binding CourseName}"
+                                                           FontSize="16"
+                                                           FontAttributes="Bold"
+                                                           Grid.Row="0"/>
+                                                    <Label Text="{Binding CourseCode}"
+                                                           FontSize="14"
+                                                           TextColor="Gray"
+                                                           Grid.Row="1"/>
+                                                    <Label Text="{Binding Schedule}"
+                                                           FontSize="14"
+                                                           TextColor="Black"
+                                                           Grid.Row="2"/>
+                                                    <Label Text="{Binding Room}"
+                                                           FontSize="14"
+                                                           TextColor="Black"
+                                                           Grid.Row="3"/>
+                                                </Grid>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ScrollView>
+</ContentPage>
