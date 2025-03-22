@@ -8,7 +8,7 @@
 - [x] นิสิตสามารถดูหน้า Profile ของตนเองได้
 - [x] นิสิตสามารถเข้าระบบได้ด้วย Email และ Password
 
-<img src="https://github.com/user-attachments/assets/c16b570e-bdc3-4b29-ad28-08b45a494e57" width="600"/>
+<img src="https://github.com/user-attachments/assets/c16b570e-bdc3-4b29-ad28-08b45a494e57" width="300"/>
 
 ---
 
